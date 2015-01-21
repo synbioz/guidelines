@@ -17,7 +17,7 @@ It can be a little annoying to change your coding style if you're used to someth
 - Constants should always be in uppercase and should have words separated by undescores
 - Use plural names for arrays, hashes, ...
 - Methods and functions should always have sensible defaults if possible
-- Strings should be defined using double quotes where possible
+- Strings should be defined using double quotes when necessary, where interpolation happen : "date #{date}" , but 'development'
 - Space should be used liberally - don't be afraid to spread things out a little to gain some clarity. Generally, there should be one space between brackets and normal statements, but no space between brackets and variables, methods or functions
 - For code blocks, use { ... } when they can be written into a single line, otherwise use do ... end
 - When setting properties of objects, always use foo= instead of set_foo
