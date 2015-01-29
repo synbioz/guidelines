@@ -323,6 +323,29 @@ Exceptions are handy to notify and handle unexpected errors:
 `String`s are widely use, you must master it:
 
 - define strings using double quotes where possible — single quoted strings don't bring much in term of performances
+    
+    Strongly disagree ! : 
+
+    define strings with double strings where you mean double strings , do not mess with object's semantic.
+    'my\string' == "my\string" => false
+    
+    Single quoted String and double quoted strings does not share the same behaviour and does not share the same escape sequences. 
+    
+    This is not a good advice regarding « you must master it » to encourage confusion between the two string litterals constructors.
+    
+    Thinking about you string's meaning is always better advice than « avoid to think about ... » 
+    
+    When reading code it is a context indicator, how can you interpret informations if you leave the context on the side ?
+    It is like using the word 'fanny' out of it's context it does not mean the same in US in UK, in Australia. This lead to confusion.
+    Also yet double quoted and single quoted string does not behave the same way there is not garantee that this differences will not get more significant divergences in later or earlier ruby versions.
+    
+    If you mean cat don't say dog !
+    
+    
+    I would advice : Use double quoted strings when you mean it is a 'one shot string template' interpolation happen here. Where parsing string may alter it's content
+    Use single quote where parsing does not alter it's content ( no interpolation ), and where you do not use symbols ...
+    
+
 - use string interpolation rather than string concatenation
 - avoid using `String#+` when you need to construct large data chunks. Use `String#<<` instead — `String#<<` mutates the string instance in-place which is faster than `String#+` which creates a new string objects on each call
 - use `String#sub` and `String#tr` when possible rather than `String#gsub` which is much slower
