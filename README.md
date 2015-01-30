@@ -101,7 +101,7 @@ array.
 
 Be consistent, always use trailing dots as it is a well known syntax for breaking lines. Even old version of the Ruby parser can handle it and you can paste the code as is in IRB.
 
-With leading dot notation there's a slight performance overhead for the interpreter and moreover IRB don't know how to handle it.
+With leading dot notation there's a slight performance overhead for the interpreter and moreover IRB don't know how to handle it.
 
 You can also break up method calls with a lot of parameters in multiple lines:
 
@@ -179,11 +179,11 @@ result =
 ## Classes and Modules ##
 
 - use modules whenever you only write class methods — classes should be used only if you need instances
-- use `Struct.new` for trivial classes where you only need accessors, constructor and comparison operators
+- use `Struct.new` for trivial classes where you only need accessors, constructor and comparison operators (more info [here](http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class/) and [there](http://blog.rubybestpractices.com/posts/rklemme/017-Struct.html))
 - use `def self.method` to define class methods
 - avoid `class << self` except when necessary
 - explicitly use `self` as the recipient of internal class or instance messages to avoid shadowing by a variable and ease reading
-- freeze constants to ensure they can't be changed
+- freeze constants to [ensure they can't be changed](http://blog.endpoint.com/2011/12/working-with-constants-in-ruby.html)
 - use a consistent structure in your class definitions
     + extend and include
     + constants
@@ -274,7 +274,7 @@ When writing methods stick to the following rules:
 - never put a space between a method name and the opening parenthesis
 - always set sensible defaults for arguments if possible
 - use spaces around the `=` operator when assigning default values to method parameters
-- use keyword arguments rather than old hash style
+- use [keyword arguments](http://robots.thoughtbot.com/ruby-2-keyword-arguments) rather than old hash style
 - use an empty line before the return value unless it's a one-liner
 - avoid `return` where not required
 - use empty lines to break up method into logical blocks
@@ -313,10 +313,10 @@ end
 
 Exceptions are handy to notify and handle unexpected errors:
 
-- don't use exceptions for flow of control
+- [don't use exceptions for flow of control](http://www.codinghell.ch/blog/2013/03/31/how-and-when-not-to-use-exceptions/)
 - avoid rescuing the `Exception` class, be more precise
 - declare rescue blocks from the more precise exception to the less one
-- raise supplying an exception class and a message 
+- raise supplying an exception class and a message
 
 ## Strings ##
 
@@ -370,9 +370,9 @@ Collections are the kind of object you'll use the most along with strings. There
 - prefer `%i` to the literal array syntax when to declare an array of symbols
 - use `Set` instead of `Array` when dealing with unique elements
 - do not modify a collection while traversing it
-- don't use `count` as a substitute for `size` — for enumerable objects other than `Array` it will iterate the entire collection its size
+- don't use `count` as a substitute for `size` — for enumerable objects other than `Array` it will [iterate the entire collection to compute its size](http://rubyinrails.com/2014/01/ruby-count-vs-length-vs-size/)
 - use `flat_map` instead of `map` + `flatten` when possible (arrays with a depth of 2)
-- use `reverse_each` instead of `reverse.each` — it's much efficient since it doesn't allocate a new array
+- use `reverse_each` instead of `reverse.each` — it's more efficient since it doesn't allocate a new array
 
 For `Hash`es:
 
@@ -434,7 +434,7 @@ Regular expressions can sometimes be the easiest way to parse a string but shoul
 
 - don't use regular expressions for plain text search in string
 - avoid using `$1-9` as it can be hard to track what they contain — use named groups instead
-- use `x` modifier for complex regexps
+- use `x` modifier for complex regexps so whitespaces and comments in the pattern will be ignored
 
 Example:
 
@@ -455,6 +455,9 @@ regexp = %r{
   end
 }x
 ```
+
+Take a look at the [Regexp API Documentation](http://ruby-doc.org/core-2.1.1/Regexp.html) since it's really exhaustive and well explained.
+
 ## Metaprogramming ##
 
 Ruby is well known for its metaprogramming capabilities. Things you can do are really amazing. Nonetheless metaprogramming can be hard to understand and is resources heavy:
