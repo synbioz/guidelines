@@ -325,17 +325,15 @@ Symbols are not string at all. They are Objects that have both a string represen
 
 Most of the points below are easthetic considerations. Keep in mind that consistency will be prevalent criterion to choose wich constructor to use
 
-### as identifier ###
+### As identifier ###
 
 Your first choice for identifier should be symbols where it is possible, ( identifier are mostly immutable, since symbols are immutable they are a good choice )
 
 Avoid complex symbols they should be easy to read :
 
 ```ruby
-
 {:key => :my_value} # Ok
 {:'un ugly symbol' => :'is difficult to read'} # NOK
-
 ```
 
 When you've got complex indentifier, or non alpha characters use single quoted stings:
@@ -351,13 +349,13 @@ A list of identifiers
 ```
 
 
-### as template ###
+### As template ###
 
 When you declare a string that will change given it's context, it is a good practice to declare with double quoted strings.
 
 Example :
 
-```
+```ruby
 frequency = lambda { |t| 1.0/t }
 heartbeat_period = 55
 cardiac_frequency = frequency.call(heartbeat_period)
@@ -370,7 +368,7 @@ Note that computation within strings is a bad habbit. Prefer to use variables.
 
 Using double quoted stings for this purpose will warn you and your teamates that something will happen in the string just by reading the first character (").
 
-### multi-line strings ###
+### Multi-line strings ###
 
 For multi-lines strings, like text fragments (you first have to avoid hardcoding text fragments, prefer to load files that contain text), there are here documents constructors:
 
