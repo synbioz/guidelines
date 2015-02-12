@@ -320,23 +320,23 @@ Exceptions are handy to notify and handle unexpected errors:
 
 ## Strings and symbols ##
 
-String class have multiple constructor, a common practice in Ruby is to convey the string purpose and context through it's constructor.
+String class have multiple constructors, a common practice in Ruby is to convey the string purpose and context through it's constructor.
 Symbols are not string at all. They are Objects that have both a string representation and an integer representation. They are immutable.
 
-Most of the points below are easthetic considerations. Keep in mind that consistency will be prevalent criterion to choose wich constructor to use
+Most of the points below are aesthetic considerations. Keep in mind that consistency will be a prevalent criterion to choose which constructor to use.
 
 ### As identifier ###
 
-Your first choice for identifier should be symbols where it is possible, ( identifier are mostly immutable, since symbols are immutable they are a good choice )
+Your first choice for identifier should be symbols where it is possible, ( identifiers are mostly immutable, since symbols are immutable they are a good choice )
 
-Avoid complex symbols they should be easy to read :
+Avoid complex symbols they should be easy to read:
 
 ```ruby
 {:key => :my_value} # Ok
 {:'un ugly symbol' => :'is difficult to read'} # NOK
 ```
 
-When you've got complex indentifier, or non alpha characters use single quoted stings:
+When you've got complex identifier, or non alpha characters use single quoted string:
 
 ```ruby
 I18n.t('.do_not_start_with_alpha_character') # the leading dot would not fit nicely with symbols
@@ -351,26 +351,25 @@ A list of identifiers
 
 ### As template ###
 
-When you declare a string that will change given it's context, it is a good practice to declare with double quoted strings.
+When you declare a string that will change given it's context, it is a good practice to use double quote constructor.
 
 Example :
 
 ```ruby
 frequency = lambda { |t| 1.0/t }
-heartbeat_period = 55
+heartbeat_period = 0.55
 cardiac_frequency = frequency.call(heartbeat_period)
 puts "your cardiac frequency is #{cardiac_frequency.round(5)} Hz"
-
 ```
 
-In this example the double quoted string allow us to interpolate values. This allow the string to mutate given it's context. If your hearbeat is null, for example ( you seem to be dead )
-Note that computation within strings is a bad habbit. Prefer to use variables.
+In this example the double quoted string allow us to interpolate value. This allow the string to mutate given it's context. If your heartbeat is null, for example ( then you might be dead ).
+Note that computation within strings is a bad habit. Prefer to use variables.
 
-Using double quoted stings for this purpose will warn you and your teamates that something will happen in the string just by reading the first character (").
+Using double quoted strings for this purpose will warn you and your teammates that something will happen within the string just by reading the first character (").
 
 ### Multi-line strings ###
 
-For multi-lines strings, like text fragments (you first have to avoid hardcoding text fragments, prefer to load files that contain text), there are here documents constructors:
+For multi-lines strings, like text fragments (you first have to avoid hard-coding text fragments, prefer to load files that contain text), there are heredoc constructors:
 
 ```ruby
 the_man = <<THEMAN
