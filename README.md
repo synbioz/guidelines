@@ -162,7 +162,7 @@ puts "OK" if condition && other_condition
 title = user.male? ? "Mr" : "Mrs"
 
 # Single line code block
-users.map { |u| "#{user.first_name} #{user.last_name}" }
+users.map { |user| "#{user.first_name} #{user.last_name}" }
 
 # Variable initialization (default value)
 country ||= "France"
