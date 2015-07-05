@@ -1,5 +1,32 @@
 # Ruby Guidelines #
 
+This is Synbioz's Ruby Guidelines
+
+Synbioz also maintains a [JavaScript Guidelines](https://github.com/synbioz/guidelines/tree/javascript).
+
+## Table of Contents
+  1.  [Source format](#source-format)
+  1.  [Coding Style](#coding-style)
+      1. [Spaces](#spaces)
+      1. [Indentation](#indentation)
+      1. [Breaking up long method calls](#breaking-up-long-method-calls)
+      1. [Naming](#naming) 
+  1.  [Control structures](#control-structures)
+  1.  [Classes and Modules](#classes-and-modules)
+      1. [Modules and classes nesting](#modules-and-classes-nesting)
+      1. [Modules and classes references](#modules-and-classes-references)
+  1.  [Methods](#methods)
+  1.  [Exceptions](#exceptions)
+  1.  [Strings](#strings)
+  1.  [Collections](#collections)
+  1.  [Regular expressions](#regular-expressions)
+  1.  [Metaprogramming](#metaprogramming)
+  1.  [Documentation](#documentation)
+      1. [Comments](#comments)
+      1. [Annotations](#annotations)
+  1.  [Misc](#misc)
+
+
 ## Source format ##
 
 All text files should:
