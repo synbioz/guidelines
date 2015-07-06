@@ -1,9 +1,5 @@
 # Ruby Guidelines #
 
-This is Synbioz's Ruby Guidelines
-
-Synbioz also maintains a [JavaScript Guidelines](https://github.com/synbioz/guidelines/tree/javascript).
-
 ## Table of Contents
   1.  [Source format](#source-format)
   1.  [Coding Style](#coding-style)
