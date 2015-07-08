@@ -206,7 +206,8 @@ result =
 - use `def self.method` to define class methods
 - avoid `class << self` except when necessary
 - explicitly use `self` as the recipient of internal class or instance messages to avoid shadowing by a variable and ease reading
-- freeze constants to [ensure they can't be changed](http://blog.endpoint.com/2011/12/working-with-constants-in-ruby.html)
+- freeze constants to [ensure their content can't be changed](http://blog.endpoint.com/2011/12/working-with-constants-in-ruby.html)
+- for stronger immutable constant needs create a module to hold it then freeze this module
 - use a consistent structure in your class definitions
     + extend and include
     + constants
