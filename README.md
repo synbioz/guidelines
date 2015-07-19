@@ -342,48 +342,86 @@ Exceptions are handy to notify and handle unexpected errors:
 - declare rescue blocks from the more precise exception to the less one
 - raise supplying an exception class and a message
 
-## Strings ##
+## Strings and symbols ##
 
-`String`s are widely use, you must master it:
+String class have multiple constructors, a common practice in Ruby is to convey the string purpose and context through it's constructor.
+Symbols are not string at all. They are Objects that have both a string representation and an integer representation. They are immutable.
 
-- define strings using double quotes where possible — single quoted strings don't bring much in term of performances
-    
-    Strongly disagree ! : 
+Most of the points below are aesthetic considerations. Keep in mind that consistency will be a prevalent criterion to choose which constructor to use.
 
-    define strings with double strings where you mean double strings , do not mess with object's semantic.
-    'my\string' == "my\string" => false
-    
-    Single quoted String and double quoted strings does not share the same behaviour and does not share the same escape sequences. 
-    
-    This is not a good advice regarding « you must master it » to encourage confusion between the two string litterals constructors.
-    
-    Thinking about you string's meaning is always better advice than « avoid to think about ... » 
-    
-    When reading code it is a context indicator, how can you interpret informations if you leave the context on the side ?
-    It is like using the word 'fanny' out of it's context it does not mean the same in US in UK, in Australia. This lead to confusion.
-    Also yet double quoted and single quoted string does not behave the same way there is not garantee that this differences will not get more significant divergences in later or earlier ruby versions.
-    
-    If you mean cat don't say dog !
-    
-    
-    I would advice : Use double quoted strings when you mean it is a 'one shot string template' interpolation happen here. Where parsing string may alter it's content
-    Use single quote where parsing does not alter it's content ( no interpolation ), and where you do not use symbols ...
-    
+### As identifier ###
+
+Your first choice for identifier should be symbols where it is possible, ( identifiers are mostly immutable, since symbols are immutable they are a good choice )
+
+Avoid complex symbols they should be easy to read:
+
+```ruby
+{:key => :my_value} # Ok
+{:'un ugly symbol' => :'is difficult to read'} # NOK
+```
+
+When you've got complex identifier, or non alpha characters use single quoted string:
+
+```ruby
+I18n.t('.do_not_start_with_alpha_character') # the leading dot would not fit nicely with symbols
+```
+
+A list of identifiers 
+
+```ruby
+%w(first second last)
+```
+
+
+### As template ###
+
+When you declare a string that will change given it's context, it is a good practice to use double quote constructor.
+
+Example :
+
+```ruby
+frequency = lambda { |t| 1.0/t }
+heartbeat_period = 0.55
+cardiac_frequency = frequency.call(heartbeat_period)
+puts "your cardiac frequency is #{cardiac_frequency.round(5)} Hz"
+```
+
+In this example the double quoted string allow us to interpolate value. This allow the string to mutate given it's context. If your heartbeat is null, for example ( then you might be dead ).
+Note that computation within strings is a bad habit. Prefer to use variables.
+
+Using double quoted strings for this purpose will warn you and your teammates that something will happen within the string just by reading the first character (").
+
+### Multi-line strings ###
+
+For multi-lines strings, like text fragments (you first have to avoid hard-coding text fragments, prefer to load files that contain text), there are heredoc constructors:
+
+```ruby
+the_man = <<THEMAN
+Haskell Brooks Curry (/ˈhæskəl ˈkɜri/; September 12, 1900 – September 1, 1982) was an American mathematician and logician. 
+  Curry is best known for his work in combinatory logic; while the initial concept of combinatory logic was based on a single paper by Moses Schönfinkel,[1] much of the development was done by Curry.
+  Curry is also known for Curry's paradox and the Curry–Howard correspondence. 
+  There are three programming languages named after him, Haskell, Brooks and Curry, as well as the concept of currying, a technique used for transforming functions in mathematics and computer science.
+THEMAN
+```
+The class remain String, but the constructor allow different behaviour.
+
+### General advices ###
 
 - use string interpolation rather than string concatenation
 - avoid using `String#+` when you need to construct large data chunks. Use `String#<<` instead — `String#<<` mutates the string instance in-place which is faster than `String#+` which creates a new string objects on each call
-- use `String#sub` and `String#tr` when possible rather than `String#gsub` which is much slower
+- use `String#sub` and `String#tr` when possible rather than `String#gsub` which is much slower (`gsub` is required only for global substitution)
+- keep consistent behaviour for ease of read
 
 ```ruby
-name = "Nico"
-message = "This is a message for #{name}:"
+name = 'Nico' # nothing happen in this string
+message = "This is a message for #{name}:" # double quotes be aware something happen
 
 notes.each do |note|
   message << "\n #{note}"
 end
 
-url.sub("http://", "https://")
-str.tr("-", "_")
+url.sub('http://', 'https://')
+str.tr('-', '_')
 ```
 
 ## Collections ##
