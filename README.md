@@ -170,7 +170,7 @@ Once my feature has been reviewed I can close my feature.
 
 ```sh
 git flow feature finish ajax_upload
-``
+```
 
 outputs:
 
