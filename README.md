@@ -1,7 +1,5 @@
 # Stylesheets Guidelines
 
-[toc]
-
 ## Source format
 
 - UTF-8
@@ -40,17 +38,17 @@ Write decimal values with the _optional_ `0` to be more consistent. ex: `margin:
 
 ```
 src/stylesheets/
-├── application.sass       # Compiled file, present at root, import other files
-├── common                 # Common's stylesheets are used on multiple pages
+├── application.sass        # Compiled file that only import _partials
+├── _common.sass            # Default tag styles and some helpers
+├── _var.sass               # All variables. Colors, fonts, padding…
+├── common                  # Common's stylesheets are used on multiple pages
 │   ├── _anim.sass
 │   ├── _button.sass
-│   ├── _common.sass
 │   ├── _errors.sass
 │   ├── _form.sass
 │   ├── _table.sass
-│   ├── _title.sass
-│   └── _var.sass
-├── modules                # Specific to a VueJS components for example
+│   └── _title.sass
+├── modules                 # Specific to a page or component (JS)
 │   ├── _alert.sass
 │   ├── _autocomplete.sass
 │   ├── _comments.sass
@@ -59,10 +57,14 @@ src/stylesheets/
 │   ├── _filestep.sass
 │   ├── _modal.sass
 │   ├── _multiselect.sass
-│   └── ...
-└── vendor                 # Imported stylesheets
+│   └── …
+└── vendor                  # Imported stylesheets
     └── _normalize.scss
 ```
+
+Directory `common/` contains independant files that you can import in any order.
+
+Stylesheets in `modules/` must be imported wisely in a component or for a specific route. This diretory can be divided is a module is large enough for multiple stylesheets.
 
 # [BEM](http://getbem.com/) and [OOCSS](http://oocss.org/) — Classes naming
 
